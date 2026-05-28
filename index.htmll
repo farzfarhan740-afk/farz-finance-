@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Farzz Finance</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background: #22c55e;
+      color: white;
+      cursor: pointer;
+    }
+    .box {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>💰 Farzz Finance Tools</h1>
+<p>Hitung tabungan kamu</p>
+
+<div class="box">
+  <input type="number" id="uang" placeholder="Uang awal">
+  <input type="number" id="bulan" placeholder="Jumlah bulan">
+  <input type="number" id="bunga" placeholder="Bunga %">
+
+  <br>
+  <button onclick="hitung()">Hitung</button>
+
+  <h2 id="hasil"></h2>
+</div>
+
+<script>
+function hitung() {
+  let uang = parseFloat(document.getElementById("uang").value);
+  let bulan = parseFloat(document.getElementById("bulan").value);
+  let bunga = parseFloat(document.getElementById("bunga").value) / 100;
+
+  let total = uang;
+
+  for (let i = 0; i < bulan; i++) {
+    total += total * bunga;
+  }
+
+  document.getElementById("hasil").innerText = 
+    "Total: Rp " + Math.round(total);
+}
+</script>
+
+</body>
+</html>
