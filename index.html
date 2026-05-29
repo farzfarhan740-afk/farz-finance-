@@ -1,49 +1,104 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Farzz Finance</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    input, button {
-      padding: 10px;
-      margin: 5px;
-      border-radius: 8px;
-      border: none;
-    }
-    button {
-      background: #22c55e;
-      color: white;
-      cursor: pointer;
-    }
-    .box {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 15px;
-      margin-top: 20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farzz Finance</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #020617;
+}
+nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+/* SECTION */
+.container {
+  padding: 20px;
+}
+.box {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+/* INPUT */
+input, button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  border: none;
+}
+button {
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+}
+</style>
 </head>
+
 <body>
 
-<h1>💰 Farzz Finance Tools</h1>
-<p>Hitung tabungan kamu</p>
+<!-- NAVBAR -->
+<nav>
+  <h2>Farzz Finance</h2>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Tools</a>
+    <a href="#">Artikel</a>
+  </div>
+</nav>
 
-<div class="box">
-  <input type="number" id="uang" placeholder="Uang awal">
-  <input type="number" id="bulan" placeholder="Jumlah bulan">
-  <input type="number" id="bunga" placeholder="Bunga %">
+<div class="container">
 
-  <br>
-  <button onclick="hitung()">Hitung</button>
+  <h1>💰 Finance Tools Sederhana</h1>
+  <p>Hitung dan kelola uang kamu dengan mudah</p>
 
-  <h2 id="hasil"></h2>
+  <!-- TOOL 1 -->
+  <div class="box">
+    <h3>Kalkulator Bunga</h3>
+    <input type="number" id="uang" placeholder="Uang awal">
+    <input type="number" id="bulan" placeholder="Bulan">
+    <input type="number" id="bunga" placeholder="Bunga %">
+    <br>
+    <button onclick="hitung()">Hitung</button>
+    <h2 id="hasil"></h2>
+  </div>
+
+  <!-- TOOL 2 -->
+  <div class="box">
+    <h3>Kalkulator Nabung</h3>
+    <input type="number" id="nabung" placeholder="Nabung per bulan">
+    <input type="number" id="bulan2" placeholder="Jumlah bulan">
+    <br>
+    <button onclick="hitungNabung()">Hitung</button>
+    <h2 id="hasil2"></h2>
+  </div>
+
+  <!-- ARTIKEL -->
+  <div class="box">
+    <h3>Cara Nabung 1 Juta Pertama</h3>
+    <p>Mulai dari nominal kecil tapi konsisten setiap bulan. Jangan tunggu kaya dulu untuk nabung.</p>
+
+    <h3>Kesalahan Finansial Umum</h3>
+    <p>Boros tanpa sadar, tidak mencatat pengeluaran, dan tidak punya tujuan keuangan.</p>
+  </div>
+
 </div>
 
 <script>
@@ -58,8 +113,16 @@ function hitung() {
     total += total * bunga;
   }
 
-  document.getElementById("hasil").innerText = 
-    "Total: Rp " + Math.round(total);
+  document.getElementById("hasil").innerText = "Total: Rp " + Math.round(total);
+}
+
+function hitungNabung() {
+  let nabung = parseFloat(document.getElementById("nabung").value);
+  let bulan = parseFloat(document.getElementById("bulan2").value);
+
+  let total = nabung * bulan;
+
+  document.getElementById("hasil2").innerText = "Total: Rp " + total;
 }
 </script>
 
