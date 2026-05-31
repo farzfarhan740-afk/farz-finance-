@@ -98,6 +98,32 @@ button {
     <h2 id="hasil2"></h2>
   </div>
 
+  
+</body>
+  <div class="box">
+  <h3>Kalkulator Pengeluaran</h3>
+
+  <input type="number" id="gaji" placeholder="Gaji">
+  <input type="number" id="pengeluaran" placeholder="Pengeluaran">
+
+  <br>
+  <button onclick="hitungSisa()">Hitung</button>
+
+  <h2 id="hasil3"></h2>
+</div>
+
+  
+<script>
+function hitungSisa() {
+  let gaji = parseFloat(document.getElementById("gaji").value);
+  let pengeluaran = parseFloat(document.getElementById("pengeluaran").value);
+
+  let sisa = gaji - pengeluaran;
+
+  document.getElementById("hasil3").innerText = "Sisa Uang: Rp " + sisa;
+}
+</script>
+
   <!-- ARTIKEL -->
   <div class="box">
     <h3>Cara Nabung 1 Juta Pertama</h3>
