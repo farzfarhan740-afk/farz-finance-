@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta name="google-site-verification" content="g0Wv6nrWwgs6Vdnebqkm06wc3cS-xD-9dazPYx5BJtE" />
-  <meta name="description" content="Tools keuangan sederhana untuk menghitung tabungan, bunga, dan belajar mengelola uang.">
-
-<meta name="keywords" content="kalkulator keuangan, cara nabung, hitung tabungan, finansial sederhana">
-
-<meta name="author" content="Farzz Finance">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Farzz Finance</title>
+
+<meta name="description" content="Tools keuangan sederhana untuk menghitung tabungan dan mengatur uang.">
+<meta name="author" content="Farzz Finance">
 
 <style>
 body {
@@ -19,25 +17,25 @@ body {
   color: white;
 }
 
-/* NAVBAR */
 nav {
   display: flex;
   justify-content: space-between;
   padding: 15px 20px;
   background: #020617;
 }
+
 nav a {
   color: white;
   margin-left: 15px;
   text-decoration: none;
 }
 
-/* SECTION */
 .container {
   padding: 20px;
 }
+
 .box {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 15px;
@@ -45,7 +43,6 @@ nav a {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* INPUT */
 input {
   padding: 10px;
   border-radius: 8px;
@@ -54,6 +51,7 @@ input {
   background: rgba(255,255,255,0.1);
   color: white;
 }
+
 button {
   padding: 12px 20px;
   border-radius: 10px;
@@ -61,134 +59,101 @@ button {
   background: linear-gradient(135deg, #38bdf8, #6366f1);
   color: white;
   font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #38bdf8;
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.7;
 }
 </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
 <nav>
   <h2>Farzz Finance</h2>
   <div>
-    <a href="index.html">Home</a>
-<a href="about.html">About</a>
-<p>Coba juga <a href="#tools">kalkulator tabungan</a> untuk menghitung uang kamu.</p>
-
-  
-<a href="index.html">Coba kalkulator tabungan disini</a>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
   </div>
 </nav>
 
 <div class="container">
 
-  <h1>💰 Finance Tools Sederhana</h1>
-  <p>Hitung dan kelola uang kamu dengan mudah</p>
+<h1>💰 Finance Tools</h1>
+<p>Hitung dan kelola uang kamu dengan mudah</p>
 
-  <!-- TOOL 1 -->
-  <div class="box">
-    <h3>Kalkulator Bunga</h3>
-    <input type="number" id="uang" placeholder="Uang awal">
-    <input type="number" id="bulan" placeholder="Bulan">
-    <input type="number" id="bunga" placeholder="Bunga %">
-    <br>
-    <button onclick="hitung()">Hitung</button>
-    <h2 id="hasil"></h2>
-  </div>
+<div class="box">
+  <h3>Kalkulator Bunga</h3>
+  <input type="number" id="uang" placeholder="Uang awal">
+  <input type="number" id="bulan" placeholder="Bulan">
+  <input type="number" id="bunga" placeholder="Bunga %">
+  <h2 id="hasil"></h2>
+</div>
 
-  <!-- TOOL 2 -->
-  <div class="box">
-    <h3>Kalkulator Nabung</h3>
-    <input type="number" id="nabung" placeholder="Nabung per bulan">
-    <input type="number" id="bulan2" placeholder="Jumlah bulan">
-    <br>
-    <button onclick="hitungNabung()">Hitung</button>
-    <h2 id="hasil2"></h2>
-  </div>
-<p>Ingin belajar lebih dalam? Lihat rekomendasi di bawah 👇</p>
-  
-</body>
-  <div class="box">
+<div class="box">
+  <h3>Kalkulator Nabung</h3>
+  <input type="number" id="nabung" placeholder="Nabung per bulan">
+  <input type="number" id="bulan2" placeholder="Jumlah bulan">
+  <h2 id="hasil2"></h2>
+</div>
+
+<div class="box">
   <h3>Kalkulator Pengeluaran</h3>
-
   <input type="number" id="gaji" placeholder="Gaji">
   <input type="number" id="pengeluaran" placeholder="Pengeluaran">
-
-  <br>
-  <button onclick="hitungSisa()">Hitung</button>
-
   <h2 id="hasil3"></h2>
 </div>
 
-  
+<div class="box">
+  <h3>Cara Nabung 1 Juta</h3>
+  <p>Mulai dari kecil, konsisten setiap bulan, dan gunakan tools ini.</p>
+
+  <h3>Kesalahan Finansial</h3>
+  <p>Boros kecil, tidak tracking uang, dan tidak punya tujuan.</p>
+
+  <a href="https://s.shopee.co.id/7KuEiPmcM4" target="_blank">
+    <button>Beli Buku Finansial</button>
+  </a>
+</div>
+
+</div>
+
+<footer>
+  © 2026 Farzz Finance
+</footer>
+
 <script>
-function hitungSisa() {
-  let gaji = parseFloat(document.getElementById("gaji").value);
-  let pengeluaran = parseFloat(document.getElementById("pengeluaran").value);
-
-  let sisa = gaji - pengeluaran;
-
-  document.getElementById("hasil3").innerText = "Sisa Uang: Rp " + sisa;
+function formatRupiah(angka) {
+  return "Rp " + angka.toLocaleString("id-ID");
 }
-</script>
 
-  <!-- ARTIKEL -->
-  <div class="box">
-    <h3>Cara Nabung 1 Juta Pertama</h3>
-    <p>Mulai dari nominal kecil tapi konsisten setiap bulan. Jangan tunggu kaya dulu untuk nabung.</p>
-
-    <h3>Kesalahan Finansial Umum</h3>
-    <p>Boros tanpa sadar, tidak mencatat pengeluaran, dan tidak punya tujuan keuangan.</p>
-  </div>
-  <h2>Cara Mengatur Gaji 1 Juta</h2>
-<p>Mengelola gaji kecil butuh strategi...</p>
-</div>
-<h2>Cara Nabung 1 Juta dalam 1 Bulan</h2>
-<p>Banyak orang merasa sulit menabung karena tidak konsisten.</p>
-<p>Mulailah dari nominal kecil dan buat target bulanan.</p>
-<p>Gunakan tools di website ini untuk menghitung tabungan kamu.</p>
-</div>
-  
-  <script>
-function hitung() {
-  let uang = parseFloat(document.getElementById("uang").value);
-  let bulan = parseFloat(document.getElementById("bulan").value);
-  let bunga = parseFloat(document.getElementById("bunga").value) / 100;
+function hitungSemua() {
+  let uang = parseFloat(document.getElementById("uang").value) || 0;
+  let bulan = parseFloat(document.getElementById("bulan").value) || 0;
+  let bunga = (parseFloat(document.getElementById("bunga").value) || 0) / 100;
 
   let total = uang;
-
   for (let i = 0; i < bulan; i++) {
     total += total * bunga;
   }
+  document.getElementById("hasil").innerText = formatRupiah(Math.round(total));
 
-  document.getElementById("hasil").innerText = "Total: Rp " + Math.round(total);
+  let nabung = parseFloat(document.getElementById("nabung").value) || 0;
+  let bulan2 = parseFloat(document.getElementById("bulan2").value) || 0;
+  document.getElementById("hasil2").innerText = formatRupiah(nabung * bulan2);
+
+  let gaji = parseFloat(document.getElementById("gaji").value) || 0;
+  let pengeluaran = parseFloat(document.getElementById("pengeluaran").value) || 0;
+  document.getElementById("hasil3").innerText = formatRupiah(gaji - pengeluaran);
 }
 
-function hitungNabung() {
-  let nabung = parseFloat(document.getElementById("nabung").value);
-  let bulan = parseFloat(document.getElementById("bulan2").value);
-
-  let total = nabung * bulan;
-
-  document.getElementById("hasil2").innerText = "Total: Rp " + total;
-}
+document.querySelectorAll("input").forEach(input => {
+  input.addEventListener("input", hitungSemua);
+});
 </script>
 
-  <h3>Buku Rekomendasi</h3>
-<p>Buku ini membantu saya memahami cara mengatur uang dari nol.</p>
-
-<a href="https://s.shopee.co.id/7KuEiPmcM4"
- target="_blank">
-  <button>Beli Sekarang</button>
-</a>
-
-</body><footer>
-  <p>© 2026 Farzz Finance</p>
-</footer>
+</body>
 </html>
