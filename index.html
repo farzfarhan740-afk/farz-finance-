@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <title>Farzz Finance</title>
 
 <meta name="description" content="Tools keuangan sederhana untuk menghitung tabungan dan mengatur uang.">
@@ -52,25 +53,22 @@ input {
   color: white;
 }
 
-button {
-  padding: 12px 20px;
-  border-radius: 10px;
-  border: none;
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
-  color: white;
-  font-weight: bold;
-}
-
 footer {
   text-align: center;
   padding: 20px;
   opacity: 0.7;
+}
+
+#persen {
+  font-size: 40px;
+  color: #38bdf8;
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <nav>
   <h2>Farzz Finance</h2>
   <div>
@@ -80,6 +78,17 @@ footer {
   </div>
 </nav>
 
+<!-- DASHBOARD -->
+<div class="container">
+  <div class="box">
+    <h2>Dashboard</h2>
+    <h1 id="persen">0%</h1>
+    <p>Estimasi Pertumbuhan</p>
+    <canvas id="chart"></canvas>
+  </div>
+</div>
+
+<!-- TOOLS -->
 <div class="container">
 
 <h1>💰 Finance Tools</h1>
@@ -130,16 +139,55 @@ function formatRupiah(angka) {
   return "Rp " + angka.toLocaleString("id-ID");
 }
 
+let chart;
+
+function updateDashboard(data) {
+  let terakhir = data[data.length - 1] || 0;
+
+  let persen = Math.min(100, Math.round((terakhir / 1000000) * 100));
+  document.getElementById("persen").innerText = persen + "%";
+
+  const ctx = document.getElementById('chart').getContext('2d');
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.map((_, i) => "Bulan " + (i + 1)),
+      datasets: [{
+        data: data,
+        borderWidth: 3,
+        tension: 0.4,
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: "white" } },
+        y: { ticks: { color: "white" } }
+      }
+    }
+  });
+}
+
 function hitungSemua() {
   let uang = parseFloat(document.getElementById("uang").value) || 0;
   let bulan = parseFloat(document.getElementById("bulan").value) || 0;
   let bunga = (parseFloat(document.getElementById("bunga").value) || 0) / 100;
 
   let total = uang;
+  let data = [];
+
   for (let i = 0; i < bulan; i++) {
     total += total * bunga;
+    data.push(Math.round(total));
   }
-  document.getElementById("hasil").innerText = formatRupiah(Math.round(total));
+
+  document.getElementById("hasil").innerText = formatRupiah(total);
+
+  // UPDATE DASHBOARD
+  updateDashboard(data);
 
   let nabung = parseFloat(document.getElementById("nabung").value) || 0;
   let bulan2 = parseFloat(document.getElementById("bulan2").value) || 0;
@@ -156,37 +204,4 @@ document.querySelectorAll("input").forEach(input => {
 </script>
 
 </body>
-  <script>
-let chart;
-
-function updateChart(data) {
-  const ctx = document.getElementById('chart').getContext('2d');
-
-  if (chart) {
-    chart.destroy();
-  }
-
-  chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: data.map((_, i) => "Bulan " + (i + 1)),
-      datasets: [{
-        label: 'Uang',
-        data: data,
-        borderWidth: 2,
-        tension: 0.3
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { labels: { color: "white" } }
-      },
-      scales: {
-        x: { ticks: { color: "white" } },
-        y: { ticks: { color: "white" } }
-      }
-    }
-  });
-}
-  </script>
 </html>
