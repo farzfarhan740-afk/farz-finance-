@@ -33,6 +33,24 @@ nav a {
 /* CONTAINER */
 .container {
   padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* TEXT */
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #cbd5f5;
 }
 
 /* CARD */
@@ -55,7 +73,7 @@ input {
   color: white;
 }
 
-/* BUTTON UNGU STARTUP */
+/* BUTTON */
 button {
   padding: 12px 20px;
   border-radius: 12px;
@@ -78,30 +96,27 @@ button:hover {
   color: #a78bfa;
 }
 </style>
-  h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
 
-p {
-  color: #64748b;
-}
 </head>
 
 <body>
 
+<!-- NAV -->
 <nav>
   <h2>Farzz Finance</h2>
   <div>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
-    
   </div>
 </nav>
- <h1>Kelola Uang Lebih Pintar 💰</h1>
-<p>Tools sederhana untuk masa depan finansial kamu</p>
-<button>Coba Sekarang</button>
-  
+
+<!-- HERO -->
+<div class="container hero">
+  <h1>Kelola Uang Lebih Pintar 💰</h1>
+  <p>Tools sederhana untuk masa depan finansial kamu</p>
+  <button onclick="window.location='#tools'">Coba Sekarang</button>
+</div>
+
 <!-- DASHBOARD -->
 <div class="container">
   <div class="box">
@@ -112,7 +127,7 @@ p {
 </div>
 
 <!-- TOOLS -->
-<div class="container">
+<div class="container" id="tools">
 
 <h1>💰 Finance Tools</h1>
 
@@ -138,13 +153,9 @@ p {
   <h2 id="hasil3"></h2>
 </div>
 
-
-
-  
-  
+<!-- VIDEO -->
 <div class="box">
   <h3>🎥 Video Saya</h3>
-
   <p>Lihat video lengkap di TikTok 👇</p>
 
   <a href="https://vm.tiktok.com/ZSQU3sMuK/" target="_blank">
@@ -152,7 +163,7 @@ p {
   </a>
 </div>
 
-  
+<!-- BELAJAR -->
 <div class="box">
   <h3>Belajar Finansial</h3>
   <p>Mulai dari kecil dan konsisten.</p>
