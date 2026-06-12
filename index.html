@@ -101,7 +101,6 @@ button:hover {
 
 <body>
 
-<!-- NAV -->
 <nav>
   <h2>Farzz Finance</h2>
   <div>
@@ -110,14 +109,12 @@ button:hover {
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="container hero">
   <h1>Kelola Uang Lebih Pintar 💰</h1>
   <p>Tools sederhana untuk masa depan finansial kamu</p>
   <button onclick="window.location='#tools'">Coba Sekarang</button>
 </div>
 
-<!-- DASHBOARD -->
 <div class="container">
   <div class="box">
     <h2>Dashboard</h2>
@@ -126,7 +123,6 @@ button:hover {
   </div>
 </div>
 
-<!-- TOOLS -->
 <div class="container" id="tools">
 
 <h1>💰 Finance Tools</h1>
@@ -153,7 +149,8 @@ button:hover {
   <h2 id="hasil3"></h2>
 </div>
 
-  <div class="box">
+<!-- TAMBAHAN FITUR -->
+<div class="box">
   <h3>🎯 Target Nabung</h3>
 
   <input type="number" id="target" placeholder="Target Uang">
@@ -164,19 +161,16 @@ button:hover {
   <div style="background:#1e293b; border-radius:10px; overflow:hidden;">
     <div id="bar" style="height:20px; width:0%; background:linear-gradient(90deg,#7c3aed,#6366f1);"></div>
   </div>
-  </div>
-  
-<!-- VIDEO -->
+</div>
+
 <div class="box">
   <h3>🎥 Video Saya</h3>
   <p>Lihat video lengkap di TikTok 👇</p>
-
   <a href="https://vm.tiktok.com/ZSQU3sMuK/" target="_blank">
     <button>Tonton Video</button>
   </a>
 </div>
 
-<!-- BELAJAR -->
 <div class="box">
   <h3>Belajar Finansial</h3>
   <p>Mulai dari kecil dan konsisten.</p>
@@ -249,6 +243,22 @@ function hitungSemua() {
 }
 
 document.querySelectorAll("input").forEach(i => i.addEventListener("input", hitungSemua));
+
+/* TAMBAHAN SCRIPT */
+function hitungTarget() {
+  let target = parseFloat(document.getElementById("target").value) || 0;
+  let sekarang = parseFloat(document.getElementById("sekarang").value) || 0;
+
+  if (target === 0) return;
+
+  let persen = Math.min(100, Math.round((sekarang / target) * 100));
+
+  document.getElementById("hasilTarget").innerText = persen + "% tercapai";
+  document.getElementById("bar").style.width = persen + "%";
+}
+
+document.getElementById("target").addEventListener("input", hitungTarget);
+document.getElementById("sekarang").addEventListener("input", hitungTarget);
 </script>
 
 </body>
