@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- LOGIN PROTECT (TAMBAHAN) -->
+<script>
+if (localStorage.getItem("login") !== "true") {
+  window.location = "login.html";
+}
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <title>Farzz Finance</title>
@@ -106,6 +114,9 @@ button:hover {
   <div>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
+
+    <!-- LOGOUT BUTTON (TAMBAHAN) -->
+    <button onclick="logout()">Logout</button>
   </div>
 </nav>
 
@@ -149,7 +160,6 @@ button:hover {
   <h2 id="hasil3"></h2>
 </div>
 
-<!-- TAMBAHAN FITUR -->
 <div class="box">
   <h3>🎯 Target Nabung</h3>
 
@@ -244,7 +254,6 @@ function hitungSemua() {
 
 document.querySelectorAll("input").forEach(i => i.addEventListener("input", hitungSemua));
 
-/* TAMBAHAN SCRIPT */
 function hitungTarget() {
   let target = parseFloat(document.getElementById("target").value) || 0;
   let sekarang = parseFloat(document.getElementById("sekarang").value) || 0;
@@ -259,6 +268,12 @@ function hitungTarget() {
 
 document.getElementById("target").addEventListener("input", hitungTarget);
 document.getElementById("sekarang").addEventListener("input", hitungTarget);
+
+/* LOGOUT (TAMBAHAN) */
+function logout() {
+  localStorage.removeItem("login");
+  window.location = "login.html";
+}
 </script>
 
 </body>
