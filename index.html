@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<title>Farzz Accounting</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e1b4b, #4f46e5);
+  color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: rgba(0,0,0,0.4);
+}
+
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.box {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+input, select {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  background: #7c3aed;
+  color: white;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+#status {
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h2>Farzz Accounting</h2>
+</nav>
+
+<div class="container">
+
+<div class="box">
+<h2>📥 Input Transaksi</h2>
+
+<input type="text" id="nama" placeholder="Keterangan">
+<select id="akun">
+  <option>Kas</option>
+  <option>Modal</option>
+  <option>Pendapatan</option>
+  <option>Beban</option>
+</select>
+<input type="number" id="debit" placeholder="Debit">
+<input type="number" id="kredit" placeholder="Kredit">
+
+<button onclick="tambah()">Tambah</button>
+
+</div>
+
+<div class="box">
+<h2>📊 Jurnal Umum</h2>
+
+<table>
+<thead>
+<tr>
+<th>Keterangan</th>
+<th>Akun</th>
+<th>Debit</th>
+<th>Kredit</th>
+</tr>
+</thead>
+<tbody id="tabel"></tbody>
+</table>
+
+<p id="status"></p>
+
+</div>
+
+<div class="box">
+<h2>📈 Dashboard</h2>
+<canvas id="chart"></canvas>
+</div>
+
+</div>
+
+<script>
+let data = [];
+let chart;
+
+function tambah() {
+  let nama = document.getElementById("nama").value;
+  let akun = document.getElementById("akun").value;
+  let debit = parseInt(document.getElementById("debit").value) || 0;
+  let kredit = parseInt(document.getElementById("kredit").value) || 0;
+
+  data.push({ nama, akun, debit, kredit });
+
+  render();
+}
+
+function render() {
+  let html = "";
+  let totalDebit = 0;
+  let totalKredit = 0;
+
+  data.forEach(d => {
+    html += `<tr>
+      <td>${d.nama}</td>
+      <td>${d.akun}</td>
+      <td>${d.debit}</td>
+      <td>${d.kredit}</td>
+    </tr>`;
+
+    totalDebit += d.debit;
+    totalKredit += d.kredit;
+  });
+
+  document.getElementById("tabel").innerHTML = html;
+
+  // cek balance
+  let status = document.getElementById("status");
+  if (totalDebit === totalKredit) {
+    status.innerText = "✅ Balance (Benar)";
+    status.style.color = "lightgreen";
+  } else {
+    status.innerText = "❌ Tidak Balance";
+    status.style.color = "red";
+  }
+
+  updateChart();
+}
+
+function updateChart() {
+  let kas = data
+    .filter(d => d.akun === "Kas")
+    .map(d => d.debit - d.kredit);
+
+  const ctx = document.getElementById("chart").getContext("2d");
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: kas.map((_, i) => i + 1),
+      datasets: [{
+        label: "Kas",
+        data: kas,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: "white" } },
+        y: { ticks: { color: "white" } }
+      }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
